@@ -7,12 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Pagina de login :</h2>
-	
-	<form action="efetuaLogin" method="POST">
-		<input type="text" name="login"/><br/>
-		<input type="text" name="senha"/><br/>
-		<input type="submit" value="Entrar"/><br/>
-	</form>
+
+<p>Bem vindo, ${usuarioLogado.login}</p>
+<a href="logout">Sair do sistema</a>
 </body>
 </html>
