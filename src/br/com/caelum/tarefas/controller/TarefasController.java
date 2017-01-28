@@ -3,6 +3,7 @@ package br.com.caelum.tarefas.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,14 @@ import br.com.caelum.tarefas.modelo.Usuario;
 @Controller
 public class TarefasController {
 	
+	private JdbcTarefaDao dao;
+	
+	@Autowired
+	public TarefasController(JdbcTarefaDao dao){
+		
+		this.dao = dao;
+	}
+	
 	@RequestMapping("novaTarefa")
 	public String nova() {
 
@@ -30,7 +39,7 @@ public class TarefasController {
 
 			return "/tarefa/Adiciona";
 		}
-		JdbcTarefaDao dao = new JdbcTarefaDao();
+		
 		dao.adiciona(tarefa);
 
 		return "/views/concluido";
@@ -39,7 +48,6 @@ public class TarefasController {
 	@RequestMapping("listaTarefa")
 	public String lista(Model m) {
 
-		JdbcTarefaDao dao = new JdbcTarefaDao();
 		m.addAttribute("lista", dao.lista());
 
 		return "tarefa/Lista";
@@ -48,7 +56,6 @@ public class TarefasController {
 	@RequestMapping("removeTarefa")
 	public String remove(Tarefa tarefa) {
 
-		JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.remove(tarefa);
 
 		return "redirect:listaTarefa";
@@ -57,7 +64,6 @@ public class TarefasController {
 	@RequestMapping("alteraTarefa")
 	public String altera(Tarefa tarefa) {
 
-		JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.altera(tarefa);
 
 		return "redirect:listaTarefa";
@@ -67,7 +73,6 @@ public class TarefasController {
 	@RequestMapping("finalizaTarefa")
 	public void finaliza(Long id){
 		
-		JdbcTarefaDao dao = new JdbcTarefaDao();
 		dao.finaliza(id);
 	}
 	

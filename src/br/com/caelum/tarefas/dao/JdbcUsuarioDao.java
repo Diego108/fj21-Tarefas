@@ -5,17 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.com.caelum.tarefas.ConnectionFactory;
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.com.caelum.tarefas.conexao.ConnectionFactory;
 import br.com.caelum.tarefas.modelo.Usuario;
 
 public class JdbcUsuarioDao {
 	private Connection connection;
 
-	public JdbcUsuarioDao() {
+	public JdbcUsuarioDao(){
+		
 		try {
-			connection = new ConnectionFactory().getConnection();
+			this.connection = new ConnectionFactory().getConnection();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
