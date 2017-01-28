@@ -76,23 +76,6 @@ public class TarefasController {
 		dao.finaliza(id);
 	}
 	
-	@RequestMapping("formLogin")
-	public String formLogin(){
-		
-		return "formulario-login";
-	}
-	
-	@RequestMapping("efetuaLogin")
-	public String efetuaLogin(Usuario usuario, HttpSession session){
-		
-		if(new JdbcUsuarioDao().existeUsuario(usuario)){
-			
-			session.setAttribute("usuarioLogado",usuario);
-			return "menu";
-		}
-		return "redirect:formLogin";
-	}
-	
 	@RequestMapping("logout")
 	public String logout(HttpSession session){
 		
